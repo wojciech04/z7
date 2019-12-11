@@ -72,17 +72,16 @@ include('dbconnection.php');
 
 	 else
 	 {
-    //jeśli ilość logowanie jest niepoprawne, tzn. mamy na przyklad błedne haslo
+    //jeśli logowanie jest niepoprawne, tzn. mamy na przyklad błedne haslo
 		 $poprawne = 0;
-
+     //zwieksz liczbe niudanych logowa oraz dodaj datę tego logowania
     $update = "update users set ilosc_nieudanych_logowan = ilosc_nieudanych_logowan + 1, data_zmiany = now() where id = $userId;";
     mysqli_query($polaczenie, $update);
-
+    //dodaj do logow informacje czy logowania bylo poprawne, czy nie
     $insert="insert into logs (user_id, poprawne_logowanie) values ('$userId', $poprawne);";
     mysqli_query($polaczenie, $insert);
-
-	 mysqli_close($polaczenie);
-
+	  mysqli_close($polaczenie);
+    //poinformuj użytkownika, że podał nie poprawne dane
    $_SESSION['bad_password']= '<span style="color:red">Niepoprawny login lub hasło!</span>';
 
    echo "<script>

@@ -19,15 +19,17 @@ if(!isset($_COOKIE["ChmuraLogUsr"])){
 		$currentPath = $userDir;
 	}
 }
+//ustal maksymalny rozmiar pliku, który może być przesłany
 $max_rozmiar = 1000;
+//jeśli plik zostal wczytany
 if (is_uploaded_file($_FILES['plik']['tmp_name'])) {
 
 	if($_FILES['plik']['size'] > $max_rozmiar ){
 		$_SESSION['size_error']='<span style="color:red">Plik, który chcesz dodać ma więcej niż 1GB!</span>';
 	}
 	else{
-move_uploaded_file($_FILES['plik']['tmp_name'],
-$currentPath.'/'.$_FILES['plik']['name']);
+		//zapisanie pliku do odpowiedniego folderu
+move_uploaded_file($_FILES['plik']['tmp_name'],$currentPath.'/'.$_FILES['plik']['name']);
 }
 }
 else {echo 'Błąd przy przesyłaniu danych!';}

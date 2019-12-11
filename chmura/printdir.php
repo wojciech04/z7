@@ -79,6 +79,7 @@ echo"</span>";
 		}
 	}
 echo"	</div>";
+//akcja gdy jesteśmy w podfolderze
 	if($withBack){
 		print "<tr>";
 		print "<td>";
@@ -92,18 +93,17 @@ echo"	</div>";
 	print "</tbody>";
 	print "</table>";
 }
-
-
 $currentPath = '';
 $userDir = '';
+//jesli cookie nie ma ustawionej nazwy usera
 if(!isset($_COOKIE["ChmuraLogUsr"])){
 	exit();
-//	  header('http://wojciechowskid.pl/pages/lab7.php');
 echo "<script>
 	window.location.replace('http://wojciechowskid.pl/pages/lab7.php');
 	</script>";
-
+  //jeśli użytkownik ma ustawione cookie i jest to jego nazwa
 		} else {
+			//ustaw userDir na ściezkę do folderu glównego
 					$userDir = '/public_html/pages/lab7/chmura/directories/'.$_COOKIE["ChmuraLogUsr"];
 					if(isset($_COOKIE["CurrentDirPath"])) {
 					$currentPath = $_COOKIE["CurrentDirPath"];
@@ -111,9 +111,11 @@ echo "<script>
 		$currentPath = $userDir;
 	}
 }
+//doklej adred do podkatalogu
 if(isset($_POST["dir"])){
 	$currentPath = $currentPath.'/'.$_POST["dir"];
 }
+//przy akcji powrotu ustaw z powrotem ścieżkę cuurentPath na zmienna userDir ( katalog główny)
 if(isset($_POST["back"])){
 	$currentPath = $userDir;
 }
@@ -122,7 +124,8 @@ if($currentPath != $userDir)
 {
 	$withBack = true;
 }
-
-setcookie("CurrentDirPath", $currentPath , time()+10*600);
+//wywołaj ustawienie cookie dla $currentPath i ustal czas na 10 minut
+setcookie("CurrentDirPath", $currentPath , time()+10*60);
+//wyświetl foldery dla aktualnej ścieżki
 printDir($currentPath, $withBack);
 ?>
