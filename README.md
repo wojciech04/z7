@@ -1,2 +1,2 @@
-# lab7
- 
+# z7
+Zadanie laboratoryjne PAS z7
