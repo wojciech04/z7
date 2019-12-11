@@ -1,8 +1,8 @@
 <?php
 $dbhost="localhost";
-$dbuser="00261600_lab7";
-$dbpassword="ej7D7Ag8p";
-$dbname="00261600_lab7";
+$dbuser="*****";
+$dbpassword="*****";
+$dbname="*****";
 
 $polaczenie = mysqli_connect($dbhost, $dbuser, $dbpassword, $dbname);
 
