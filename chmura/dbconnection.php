@@ -1,0 +1,16 @@
+<?php
+$dbhost="localhost";
+$dbuser="00261600_lab7";
+$dbpassword="ej7D7Ag8p";
+$dbname="00261600_lab7";
+
+$polaczenie = mysqli_connect($dbhost, $dbuser, $dbpassword, $dbname);
+
+if (!$polaczenie) {
+echo "Błąd połączenia z MySQL." . PHP_EOL;
+echo "Errno: " . mysqli_connect_errno() . PHP_EOL;
+echo "Error: " . mysqli_connect_error() . PHP_EOL;
+exit;
+}
+mysqli_query($polaczenie, "SET NAMES 'utf8'"); // ustawienie polskich znaków
+?>

@@ -1,0 +1,59 @@
+CREATE 
+TABLE `loginMechanik`
+(
+idkonto INT(11) NOT NULL AUTO_INCREMENT,
+czasLogowania TIMESTAMP,
+
+
+PRIMARY KEY (idkonto)
+)
+
+CHARACTER SET = utf8;
+
+
+
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8;
+
+
+ALTER TABLE `pojazd`
+       ADD FOREIGN KEY (idklient) REFERENCES klient (klientID);
+
+ALTER TABLE `czesciUzyte`
+       ADD FOREIGN KEY (idpojazd) REFERENCES pojazd (idpojazd);
+
+ALTER TABLE `zlecenieSzczegoly`
+ 	ADD idzlecenie INT NOT NULL,
+	ADD CONSTRAINT fk_idzlecenie
+	FOREIGN KEY (idzlecenie) 
+	REFERENCES `zlecenie` (idzlecenie);
+
+ALTER TABLE `pojazd`
+ 	ADD idzlecenie INT NOT NULL,
+	ADD CONSTRAINT fk_idzlecenie
+	FOREIGN KEY (idzlecenie) 
+	REFERENCES `zlecenie` (idzlecenie);
+
+
+ALTER TABLE `pojazd`
+ 	ADD fk_idzlecenie INT NOT NULL,
+	ADD FOREIGN KEY (fk_idmechanik) 
+	REFERENCES `mechanicy`(idmechanik),
+	ADD UNIQUE (fk_idmechanik);
+
+
+ALTER TABLE `zlecenie`
+ 	ADD fk_idpojazd INT NOT NULL,
+	ADD FOREIGN KEY (fk_idpojazd) 
+	REFERENCES `pojazd`(idpojazd)
+	
+	ON UPDATE CASCADE
+        ON DELETE CASCADE;
+
+    categoryId INT NOT NULL,
+    CONSTRAINT fk_category
+    FOREIGN KEY (categoryId) 
+    REFERENCES categories(categoryId)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
